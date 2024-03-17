@@ -21,12 +21,7 @@ model = project.version(1).model
 st.title("Shrimp Detection and Analysis")
 
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg"])
- if image is not None:
-        # Resize the image to reduce its dimensions, if necessary
-        # Define the desired width and height or scale factor
-        desired_width = 1024
-        scale_factor = desired_width / image.shape[1]
-        resized_image = cv2.resize(image, None, fx=scale_factor, fy=scale_factor, interpolation=cv2.INTER_AREA)
+if uploaded_file is not None:
     # Save uploaded file to a temporary file
     with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as tmp_file:
         tmp_file.write(uploaded_file.getvalue())
@@ -38,6 +33,11 @@ uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg"])
     
     # Check if the image was successfully loaded
     if image is not None:
+
+        desired_width = 1024
+        scale_factor = desired_width / image.shape[1]
+        resized_image = cv2.resize(image, None, fx=scale_factor, fy=scale_factor, interpolation=cv2.INTER_AREA)
+
         # Display the uploaded image
         st.image(image, channels="BGR", caption="Uploaded Image")
 
@@ -95,4 +95,3 @@ uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg"])
         st.error("Failed to read the image. Please check the file format and try again.")
         # Cleanup even if the image fails to load
         os.remove(tmp_file_path)
-
