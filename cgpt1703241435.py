@@ -21,7 +21,12 @@ model = project.version(1).model
 st.title("Shrimp Detection and Analysis")
 
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg"])
-if uploaded_file is not None:
+ if image is not None:
+        # Resize the image to reduce its dimensions, if necessary
+        # Define the desired width and height or scale factor
+        desired_width = 1024
+        scale_factor = desired_width / image.shape[1]
+        resized_image = cv2.resize(image, None, fx=scale_factor, fy=scale_factor, interpolation=cv2.INTER_AREA)
     # Save uploaded file to a temporary file
     with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as tmp_file:
         tmp_file.write(uploaded_file.getvalue())
