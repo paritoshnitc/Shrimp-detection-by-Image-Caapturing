@@ -16,7 +16,7 @@ import os
 # Initialize Roboflow with your API key
 rf = Roboflow(api_key="xJFjzUFI5Aj9scn14Aki")
 project = rf.workspace().project("0702241217")
-model = project.version(1).model
+model = project.version(2).model
 
 st.title("Shrimp Detection and Analysis")
 
