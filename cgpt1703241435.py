@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
-
 import streamlit as st
 import roboflow as rf
 from roboflow import Roboflow
@@ -33,7 +30,6 @@ if uploaded_file is not None:
     
     # Check if the image was successfully loaded
     if image is not None:
-
         desired_width = 1024
         scale_factor = desired_width / image.shape[1]
         resized_image = cv2.resize(image, None, fx=scale_factor, fy=scale_factor, interpolation=cv2.INTER_AREA)
@@ -56,7 +52,7 @@ if uploaded_file is not None:
         # Display the annotated image
         st.image(annotated_image, channels="BGR", caption="Annotated Image")
 
-         # Initialize a list to store the number of pixels for each shrimp
+        # Initialize a list to store the number of pixels for each shrimp
         shrimp_areas = []
        
         # Directly iterate over the xyxy bounding box coordinates
@@ -76,24 +72,24 @@ if uploaded_file is not None:
             shrimp_areas.append(area)
 
         # Sort the shrimp areas in descending order
-        shrimp_areas.sort
-        st.write("shrimp_areas",shrimp_areas)
+        shrimp_areas.sort(reverse=True)
+        st.write("Shrimp areas:", shrimp_areas)
 
         # Display shrimp areas and calculate ratios (simplified for brevity)
         if shrimp_areas:
             num_shrimp = len(shrimp_areas)
-top_10_percent_count = max(int(num_shrimp * 0.1), 1) # Ensure at least 1 item is selected
-bottom_10_percent_count = top_10_percent_count
+            top_10_percent_count = max(int(num_shrimp * 0.1), 1)  # Ensure at least 1 item is selected
+            bottom_10_percent_count = top_10_percent_count
 
-# Correctly calculate the sum of areas in the top 10% and the bottom 10% after raising them to the power of 1.5
-sum_top_10_percent_areas = sum([area ** 1.5 for area in shrimp_areas[-top_10_percent_count:]])
-sum_bottom_10_percent_areas = sum([area ** 1.5 for area in shrimp_areas[:bottom_10_percent_count]])
+            # Correctly calculate the sum of areas in the top 10% and the bottom 10% after raising them to the power of 1.5
+            sum_top_10_percent_areas = sum([area ** 1.5 for area in shrimp_areas[-top_10_percent_count:]])
+            sum_bottom_10_percent_areas = sum([area ** 1.5 for area in shrimp_areas[:bottom_10_percent_count]])
 
-# Calculate the overall ratio
-overall_ratio = sum_top_10_percent_areas / sum_bottom_10_percent_areas if sum_bottom_10_percent_areas != 0 else float('inf')
+            # Calculate the overall ratio
+            overall_ratio = sum_top_10_percent_areas / sum_bottom_10_percent_areas if sum_bottom_10_percent_areas != 0 else float('inf')
 
-            st.write("sum_top_10_percent_areas ^1.5:", sum_top_10_percent_areas)
-            st.write("sum_bottom_10_percent_areas^1.5:", sum_bottom_10_percent_areas)
+            st.write("Sum of top 10% shrimp areas ^1.5:", sum_top_10_percent_areas)
+            st.write("Sum of bottom 10% shrimp areas^1.5:", sum_bottom_10_percent_areas)
             st.write("Overall Ratio:", overall_ratio)
 
         # Cleanup: remove the temporary file
