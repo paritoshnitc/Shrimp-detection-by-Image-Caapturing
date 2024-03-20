@@ -76,17 +76,24 @@ if uploaded_file is not None:
             shrimp_areas.append(area)
 
         # Sort the shrimp areas in descending order
-        shrimp_areas.sort(reverse=True)
+        shrimp_areas.sort
         st.write("shrimp_areas",shrimp_areas)
 
         # Display shrimp areas and calculate ratios (simplified for brevity)
         if shrimp_areas:
-            top_10_ratio = sum([(area ** 1.5) for area in shrimp_areas[:10]])
-            bottom_10_ratio = sum([(area ** 1.5) for area in shrimp_areas[-10:]])
-            overall_ratio = top_10_ratio / bottom_10_ratio
+            num_shrimp = len(shrimp_areas)
+top_10_percent_count = max(int(num_shrimp * 0.1), 1) # Ensure at least 1 item is selected
+bottom_10_percent_count = top_10_percent_count
 
-            st.write("Top 10 shrimp areas^1.5:", top_10_ratio)
-            st.write("Bottom 10 shrimp areas^1.5:", bottom_10_ratio)
+# Correctly calculate the sum of areas in the top 10% and the bottom 10% after raising them to the power of 1.5
+sum_top_10_percent_areas = sum([area ** 1.5 for area in shrimp_areas[-top_10_percent_count:]])
+sum_bottom_10_percent_areas = sum([area ** 1.5 for area in shrimp_areas[:bottom_10_percent_count]])
+
+# Calculate the overall ratio
+overall_ratio = sum_top_10_percent_areas / sum_bottom_10_percent_areas if sum_bottom_10_percent_areas != 0 else float('inf')
+
+            st.write("sum_top_10_percent_areas ^1.5:", sum_top_10_percent_areas)
+            st.write("sum_bottom_10_percent_areas^1.5:", sum_bottom_10_percent_areas)
             st.write("Overall Ratio:", overall_ratio)
 
         # Cleanup: remove the temporary file
