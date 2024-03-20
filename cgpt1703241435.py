@@ -72,7 +72,7 @@ if uploaded_file is not None:
             shrimp_areas.append(area)
 
         # Sort the shrimp areas in descending order
-        shrimp_areas.sort(reverse=True)
+        shrimp_areas.sort
         st.write("Shrimp areas:", shrimp_areas)
 
         # Display shrimp areas and calculate ratios (simplified for brevity)
