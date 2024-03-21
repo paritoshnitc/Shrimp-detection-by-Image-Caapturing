@@ -98,12 +98,14 @@ if uploaded_file is not None:
             # Assuming shrimp_areas is already sorted
             # If not, sort it: shrimp_areas = sorted(shrimp_areas)
 
-            # Calculate the index range for the bottom 10 percent, excluding the smallest 2 areas
-            bottom_10_percent_index_start = 2  # Start after the smallest 2 areas
-            bottom_10_percent_index_end = bottom_10_percent_count+2  # End at the upper limit of the bottom 10%
+            # Assuming bottom_10_percent_count is the desired number in the bottom 10% not including the two smallest
+            bottom_10_percent_index_start = 2  # Skip the two smallest
+# Calculate the new end index by adjusting for the actual count you want to sum
+            bottom_10_percent_index_end = bottom_10_percent_index_start + bottom_10_percent_count
 
-            # Calculate the sum of area ** 1.5 for the desired shrimp_areas subset
+            # Calculate the sum of area ** 1.5 for the adjusted subset of shrimp_areas
             sum_bottom_10_percent_areas = sum([area ** 1.5 for area in shrimp_areas[bottom_10_percent_index_start:bottom_10_percent_index_end]])
+
 
             print(sum_bottom_10_percent_areas)
 
