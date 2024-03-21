@@ -78,7 +78,7 @@ if uploaded_file is not None:
         # Display shrimp areas and calculate ratios (simplified for brevity)
         if shrimp_areas:
             num_shrimp = len(shrimp_areas)
-            top_10_percent_count = max(int(num_shrimp * 0.1), 1)  # Ensure at least 1 item is selected
+            top_10_percent_count =  max(math.ceil(num_shrimp * 0.1), 1)  # Ensure at least 1 item is selected
             bottom_10_percent_count = top_10_percent_count
 
             # Correctly calculate the sum of areas in the top 10% and the bottom 10% after raising them to the power of 1.5
