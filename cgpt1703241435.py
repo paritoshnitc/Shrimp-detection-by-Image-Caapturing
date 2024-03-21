@@ -100,7 +100,7 @@ if uploaded_file is not None:
 
             # Calculate the index range for the bottom 10 percent, excluding the smallest 2 areas
             bottom_10_percent_index_start = 2  # Start after the smallest 2 areas
-            bottom_10_percent_index_end = bottom_10_percent_count  # End at the upper limit of the bottom 10%
+            bottom_10_percent_index_end = bottom_10_percent_count+2  # End at the upper limit of the bottom 10%
 
             # Calculate the sum of area ** 1.5 for the desired shrimp_areas subset
             sum_bottom_10_percent_areas = sum([area ** 1.5 for area in shrimp_areas[bottom_10_percent_index_start:bottom_10_percent_index_end]])
