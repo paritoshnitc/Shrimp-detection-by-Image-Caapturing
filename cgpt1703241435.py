@@ -82,8 +82,34 @@ if uploaded_file is not None:
             bottom_10_percent_count = top_10_percent_count
 
             # Correctly calculate the sum of areas in the top 10% and the bottom 10% after raising them to the power of 1.5
-            sum_top_10_percent_areas = sum([area ** 1.5 for area in shrimp_areas[-top_10_percent_count:]])
-            sum_bottom_10_percent_areas = sum([area ** 1.5 for area in shrimp_areas[:bottom_10_percent_count]])
+            #sum_top_10_percent_areas = sum([area ** 1.5 for area in shrimp_areas[-top_10_percent_count:]])
+
+            # Assuming shrimp_areas is already sorted
+# If not, sort it: shrimp_areas = sorted(shrimp_areas)
+
+# Calculate the index range for the top 10 percent, excluding the top 2 areas
+            top_10_percent_index_start = -top_10_percent_count - 2
+            top_10_percent_index_end = -2  # Exclude the top 2 largest areas
+
+# Calculate the sum of area ** 1.5 for the desired shrimp_areas subset
+            sum_top_10_percent_areas = sum([area ** 1.5 for area in shrimp_areas[top_10_percent_index_start:top_10_percent_index_end]])
+
+print(sum_top_10_percent_areas)
+
+            #sum_bottom_10_percent_areas = sum([area ** 1.5 for area in shrimp_areas[:bottom_10_percent_count]])
+
+            # Assuming shrimp_areas is already sorted
+# If not, sort it: shrimp_areas = sorted(shrimp_areas)
+
+# Calculate the index range for the bottom 10 percent, excluding the smallest 2 areas
+            bottom_10_percent_index_start = 2  # Start after the smallest 2 areas
+            bottom_10_percent_index_end = bottom_10_percent_count  # End at the upper limit of the bottom 10%
+
+# Calculate the sum of area ** 1.5 for the desired shrimp_areas subset
+            sum_bottom_10_percent_areas = sum([area ** 1.5 for area in shrimp_areas[bottom_10_percent_index_start:bottom_10_percent_index_end]])
+
+print(sum_bottom_10_percent_areas)
+
 
             # Calculate the overall ratio
             overall_ratio = sum_top_10_percent_areas / sum_bottom_10_percent_areas if sum_bottom_10_percent_areas != 0 else float('inf')
