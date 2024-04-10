@@ -87,8 +87,8 @@ if uploaded_file is not None:
             # If not, sort it: shrimp_areas = sorted(shrimp_areas)
 
             # Calculate the index range for the top 10 percent, excluding the top 3 areas
-            top_10_percent_index_start = -top_10_percent_count - 4
-            top_10_percent_index_end = -4  # Exclude the top 2 largest areas
+            top_10_percent_index_start = -top_10_percent_count - 1
+            top_10_percent_index_end = -1  # Exclude the top 2 largest areas
 
             # Calculate the sum of area ** 1.5 for the desired shrimp_areas subset
             sum_top_10_percent_areas = sum([area ** 1.5 for area in shrimp_areas[top_10_percent_index_start:top_10_percent_index_end]])
@@ -99,7 +99,7 @@ if uploaded_file is not None:
             # If not, sort it: shrimp_areas = sorted(shrimp_areas)
 
             # Assuming bottom_10_percent_count is the desired number in the bottom 10% not including the two smallest
-            bottom_10_percent_index_start = 4  # Skip the two smallest
+            bottom_10_percent_index_start = 1  # Skip the two smallest
 # Calculate the new end index by adjusting for the actual count you want to sum
             bottom_10_percent_index_end = bottom_10_percent_index_start + bottom_10_percent_count
 
