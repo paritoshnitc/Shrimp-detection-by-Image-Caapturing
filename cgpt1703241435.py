@@ -50,21 +50,24 @@ if uploaded_file is not None:
         annotated_image = mask_annotator.annotate(scene=image, detections=detections)
         annotated_image = label_annotator.annotate(scene=annotated_image, detections=detections)
 
-        # Display the annotated image
-        st.image(annotated_image, channels="BGR", caption="Annotated Image")
-
         # Initialize a list to store the number of pixels for each shrimp
         shrimp_areas = []
-       
+
         # Directly iterate over the xyxy bounding box coordinates
-        for bbox in detections.xyxy:
+        for idx, bbox in enumerate(detections.xyxy):
             x1, y1, x2, y2 = map(int, bbox)
 
-            # Crop the region of interest (ROI) from the image
-            roi = image[y1:y2, x1:x2]
+            # Crop the region of interest (ROI) from the segmented image
+            roi_segmented = annotated_image[y1:y2, x1:x2]
+
+            # Calculate text position for the annotation
+            text_position = (x1, y1 - 10)  # Adjust text position as needed
+
+            # Annotate the segmented image with shrimp number
+            cv2.putText(annotated_image, str(idx + 1), text_position, cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 0, 0), 2)
 
             # Convert the ROI to grayscale
-            roi_gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
+            roi_gray = cv2.cvtColor(roi_segmented, cv2.COLOR_BGR2GRAY)
 
             # Count non-zero pixels (representing the shrimp region)
             area = cv2.countNonZero(roi_gray)
@@ -72,11 +75,21 @@ if uploaded_file is not None:
             # Append the area to the list
             shrimp_areas.append(area)
 
+        # Display the annotated segmented image
+        st.image(annotated_image, channels="BGR", caption="Annotated Segmented Image")
+
         # Sort the shrimp areas in descending order
-        shrimp_areas.sort()
-        st.write("Shrimp areas:", shrimp_areas)
+        shrimp_areas.sort(reverse=True)
+       # st.write("Shrimp areas (in pixels):", shrimp_areas)
+        # Display shrimp areas and calculate ratios (simplified for brevity)
+        if shrimp_areas:
+           st.write("Shrimp areas (in pixels):")
+        for idx, area in enumerate(shrimp_areas):
+            st.write(f"{idx + 1}: {area}")
+
 
         # Display shrimp areas and calculate ratios (simplified for brevity)
+        shrimp_areas.sort(reverse=False)
         if shrimp_areas:
             num_shrimp = len(shrimp_areas)
             top_10_percent_count =  max(math.ceil(num_shrimp * 0.1), 1)  # Ensure at least 1 item is selected
@@ -93,21 +106,12 @@ if uploaded_file is not None:
             # Calculate the sum of area ** 1.5 for the desired shrimp_areas subset
             sum_top_10_percent_areas = sum([area ** 1.5 for area in shrimp_areas[top_10_percent_index_start:top_10_percent_index_end]])
 
-            print(sum_top_10_percent_areas)
-
-            # Assuming shrimp_areas is already sorted
-            # If not, sort it: shrimp_areas = sorted(shrimp_areas)
-
-            # Assuming bottom_10_percent_count is the desired number in the bottom 10% not including the two smallest
+            # Calculate the index range for the bottom 10 percent, excluding the two smallest
             bottom_10_percent_index_start = 1  # Skip the two smallest
-# Calculate the new end index by adjusting for the actual count you want to sum
             bottom_10_percent_index_end = bottom_10_percent_index_start + bottom_10_percent_count
 
             # Calculate the sum of area ** 1.5 for the adjusted subset of shrimp_areas
             sum_bottom_10_percent_areas = sum([area ** 1.5 for area in shrimp_areas[bottom_10_percent_index_start:bottom_10_percent_index_end]])
-
-
-            print(sum_bottom_10_percent_areas)
 
             # Calculate the overall ratio
             overall_ratio = sum_top_10_percent_areas / sum_bottom_10_percent_areas if sum_bottom_10_percent_areas != 0 else float('inf')
