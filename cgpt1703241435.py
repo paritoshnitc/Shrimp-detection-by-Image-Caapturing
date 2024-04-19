@@ -80,8 +80,6 @@ if uploaded_file is not None:
 
         # Sort the shrimp areas in descending order
         shrimp_areas.sort(reverse=True)
-       # st.write("Shrimp areas (in pixels):", shrimp_areas)
-        # Display shrimp areas and calculate ratios (simplified for brevity)
         if shrimp_areas:
            st.write("Shrimp areas (in pixels):")
         for idx, area in enumerate(shrimp_areas):
@@ -95,11 +93,6 @@ if uploaded_file is not None:
             top_10_percent_count =  max(math.ceil(num_shrimp * 0.1), 1)  # Ensure at least 1 item is selected
             bottom_10_percent_count = top_10_percent_count
 
-            # Correctly calculate the sum of areas in the top 10% and the bottom 10% after raising them to the power of 1.5
-            # Assuming shrimp_areas is already sorted
-            # If not, sort it: shrimp_areas = sorted(shrimp_areas)
-
-            # Calculate the index range for the top 10 percent, excluding the top 3 areas
             top_10_percent_index_start = -top_10_percent_count - 1
             top_10_percent_index_end = -1  # Exclude the top 2 largest areas
 
