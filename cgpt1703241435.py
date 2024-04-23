@@ -12,9 +12,9 @@ import os
 import math
 
 # Initialize Roboflow with your API key
-rf = Roboflow(api_key="92CmdnUJFTdTsWn9ktEK")
-project = rf.workspace().project("segmentation-u0qgb")
-model = project.version(4).model
+rf = Roboflow(api_key="CFNTjMGFICYz3vLozs3A")
+project = rf.workspace().project("prawn-qoy6a")
+model = project.version(2).model
 
 st.title("Shrimp Detection and Analysis")
 
