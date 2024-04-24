@@ -76,7 +76,7 @@ if uploaded_file is not None:
             shrimp_areas.append(area)
 
         # Display the annotated segmented image
-        st.image(annotated_image, channels="BGR", caption="Annotated Segmented Image")
+       # st.image(annotated_image, channels="BGR", caption="Annotated Segmented Image")
 
         # Sort the shrimp areas in descending order
         shrimp_areas.sort(reverse=True)
