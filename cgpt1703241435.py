@@ -80,10 +80,10 @@ if uploaded_file is not None:
 
         # Sort the shrimp areas in descending order
         shrimp_areas.sort(reverse=True)
-        if shrimp_areas:
-           st.write("Shrimp areas (in pixels):")
-        for idx, area in enumerate(shrimp_areas):
-            st.write(f"{idx + 1}: {area}")
+        #if shrimp_areas:
+         #  st.write("Shrimp areas (in pixels):")
+       # for idx, area in enumerate(shrimp_areas):
+       #     st.write(f"{idx + 1}: {area}")
 
 
         # Display shrimp areas and calculate ratios (simplified for brevity)
