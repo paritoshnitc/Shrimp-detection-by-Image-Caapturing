@@ -97,14 +97,14 @@ if uploaded_file is not None:
             top_10_percent_index_end = -1  # Exclude the top 2 largest areas
 
             # Calculate the sum of area ** 1.5 for the desired shrimp_areas subset
-            sum_top_10_percent_areas = sum([area ** 1.5 for area in shrimp_areas[top_10_percent_index_start:top_10_percent_index_end]])
+            sum_top_10_percent_areas = sum([area ** .636 for area in shrimp_areas[top_10_percent_index_start:top_10_percent_index_end]])
 
             # Calculate the index range for the bottom 10 percent, excluding the two smallest
             bottom_10_percent_index_start = 1  # Skip the two smallest
             bottom_10_percent_index_end = bottom_10_percent_index_start + bottom_10_percent_count
 
             # Calculate the sum of area ** 1.5 for the adjusted subset of shrimp_areas
-            sum_bottom_10_percent_areas = sum([area ** 1.5 for area in shrimp_areas[bottom_10_percent_index_start:bottom_10_percent_index_end]])
+            sum_bottom_10_percent_areas = sum([area ** .636 for area in shrimp_areas[bottom_10_percent_index_start:bottom_10_percent_index_end]])
 
             # Calculate the overall ratio
             overall_ratio = sum_top_10_percent_areas / sum_bottom_10_percent_areas if sum_bottom_10_percent_areas != 0 else float('inf')
