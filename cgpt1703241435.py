@@ -76,14 +76,14 @@ if uploaded_file is not None:
             shrimp_areas.append(area)
 
         # Display the annotated segmented image
-       # st.image(annotated_image, channels="BGR", caption="Annotated Segmented Image")
+        st.image(annotated_image, channels="BGR", caption="Annotated Segmented Image")
 
         # Sort the shrimp areas in descending order
         shrimp_areas.sort(reverse=True)
-        #if shrimp_areas:
-         #  st.write("Shrimp areas (in pixels):")
-       # for idx, area in enumerate(shrimp_areas):
-       #     st.write(f"{idx + 1}: {area}")
+        if shrimp_areas:
+           st.write("Shrimp areas (in pixels):")
+        for idx, area in enumerate(shrimp_areas):
+            st.write(f"{idx + 1}: {area}")
 
 
         # Display shrimp areas and calculate ratios (simplified for brevity)
