@@ -93,7 +93,7 @@ if uploaded_file is not None:
         if shrimp_areas:
             num_shrimp = len(shrimp_areas)
   
-            if 4 <= shrimp_per_lb <= 16:
+            if 4 <= shrimp_per_lb <= 20:
                 top_count = min(num_shrimp, 5)
                 bottom_count = min(num_shrimp, 5)
 
