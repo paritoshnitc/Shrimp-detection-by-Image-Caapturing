@@ -114,8 +114,8 @@ if uploaded_file is not None:
 
             bottom_10_percent_index_end = bottom_count  # Include all items in bottom count
 
-            sum_top_10_percent_areas = sum([area ** .676 for area in shrimp_areas[top_10_percent_index_start:top_10_percent_index_end]])
-            sum_bottom_10_percent_areas = sum([area ** .676 for area in shrimp_areas[:bottom_10_percent_index_end]])
+            sum_top_10_percent_areas = sum([area ** .696 for area in shrimp_areas[top_10_percent_index_start:top_10_percent_index_end]])
+            sum_bottom_10_percent_areas = sum([area ** .696 for area in shrimp_areas[:bottom_10_percent_index_end]])
 
             overall_ratio = sum_top_10_percent_areas / sum_bottom_10_percent_areas if sum_bottom_10_percent_areas != 0 else float('inf')
 
