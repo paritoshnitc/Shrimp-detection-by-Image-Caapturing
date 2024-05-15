@@ -89,7 +89,7 @@ if uploaded_file is not None:
         shrimp_per_lb = st.number_input("Enter the shrimp per pound:", value=30, step=1)
 
         # Display shrimp areas and calculate ratios (simplified for brevity)
-        # shrimp_areas.sort(reverse=True)
+        shrimp_areas.sort(reverse=False)
         if shrimp_areas:
             num_shrimp = len(shrimp_areas)
   
