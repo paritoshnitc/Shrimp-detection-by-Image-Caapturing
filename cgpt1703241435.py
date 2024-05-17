@@ -64,7 +64,7 @@ if uploaded_file is not None:
             text_position = (x1, y1 - 10)  # Adjust text position as needed
 
             # Annotate the segmented image with shrimp number
-            cv2.putText(annotated_image, str(idx + 1), text_position, cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+            cv2.putText(annotated_image, str(idx + 1), text_position, cv2.FONT_HERSHEY_SIMPLEX, .7, (255, 0, 0), 2)
 
             # Convert the ROI to grayscale
             roi_gray = cv2.cvtColor(roi_segmented, cv2.COLOR_BGR2GRAY)
