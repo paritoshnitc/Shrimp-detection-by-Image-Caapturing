@@ -39,7 +39,7 @@ if uploaded_file is not None:
         st.image(image, channels="BGR", caption="Uploaded Image")
 
         # Make prediction on the uploaded image using the path of the temporary file
-        result = model.predict(tmp_file_path, confidence=50).json()
+        result = model.predict(tmp_file_path, confidence=30).json()
 
         # Adaptation to the updated API
         detections = sv.Detections.from_inference(result)
