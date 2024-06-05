@@ -6,7 +6,7 @@ import roboflow as rf
 from roboflow import Roboflow
 import supervision as sv
 import tempfile
-import cv2
+import cv1
 import numpy as np
 import os
 import math
@@ -27,13 +27,13 @@ if uploaded_file is not None:
         tmp_file_path = tmp_file.name
 
     # Read the file using OpenCV
-    image = cv2.imread(tmp_file_path)
+    image = cv1.imread(tmp_file_path)
     
     # Check if the image was successfully loaded
     if image is not None:
         desired_width = 1024
         scale_factor = desired_width / image.shape[1]
-        resized_image = cv2.resize(image, None, fx=scale_factor, fy=scale_factor, interpolation=cv2.INTER_AREA)
+        resized_image = cv1.resize(image, None, fx=scale_factor, fy=scale_factor, interpolation=cv1.INTER_AREA)
 
         # Display the uploaded image
         st.image(image, channels="BGR", caption="Uploaded Image")
@@ -64,13 +64,13 @@ if uploaded_file is not None:
             text_position = (x1, y1 - 10)  # Adjust text position as needed
 
             # Annotate the segmented image with shrimp number
-            cv2.putText(annotated_image, str(idx + 1), text_position, cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 0, 0), 2)
+            cv1.putText(annotated_image, str(idx + 1), text_position, cv1.FONT_HERSHEY_SIMPLEX, 1.5, (255, 0, 0), 2)
 
             # Convert the ROI to grayscale
-            roi_gray = cv2.cvtColor(roi_segmented, cv2.COLOR_BGR2GRAY)
+            roi_gray = cv1.cvtColor(roi_segmented, cv1.COLOR_BGR2GRAY)
 
             # Count non-zero pixels (representing the shrimp region)
-            area = cv2.countNonZero(roi_gray)
+            area = cv1.countNonZero(roi_gray)
 
             # Append the area to the list
             shrimp_areas.append(area)
