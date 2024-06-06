@@ -2,3 +2,4 @@ streamlit
 roboflow
 opencv-python-headless
 supervision
+
