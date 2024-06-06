@@ -81,40 +81,50 @@ if uploaded_file is not None:
         # Sort the shrimp areas in descending order
         shrimp_areas.sort(reverse=True)
         if shrimp_areas:
-           st.write("Shrimp areas (in pixels):")
-        for idx, area in enumerate(shrimp_areas):
-            st.write(f"{idx + 1}: {area}")
+            st.write("Shrimp areas (in pixels):")
+            for idx, area in enumerate(shrimp_areas):
+                st.write(f"{idx + 1}: {area}")
 
+        # Prompt the user to input shrimp per pound
+        shrimp_per_lb = st.number_input("Enter the shrimp per pound:", value=30, step=1)
 
         # Display shrimp areas and calculate ratios (simplified for brevity)
         shrimp_areas.sort(reverse=False)
         if shrimp_areas:
             num_shrimp = len(shrimp_areas)
-            top_10_percent_count =  max(math.ceil(num_shrimp * 0.1), 1)  # Ensure at least 1 item is selected
-            bottom_10_percent_count = top_10_percent_count
+  
+            if 4 <= shrimp_per_lb <= 20:
+                top_count = min(num_shrimp, 5)
+                bottom_count = min(num_shrimp, 5)
 
-            top_10_percent_index_start = -top_10_percent_count - 1
-            top_10_percent_index_end = -1  # Exclude the top 2 largest areas
+            elif 21 <= shrimp_per_lb <= 60:
+                top_count = min(num_shrimp, 10)
+                bottom_count = min(num_shrimp, 10)
 
-            # Calculate the sum of area ** 1.5 for the desired shrimp_areas subset
-            sum_top_10_percent_areas = sum([area ** .636 for area in shrimp_areas[top_10_percent_index_start:top_10_percent_index_end]])
+            elif 61 <= shrimp_per_lb <= 200:
+                top_count = min(num_shrimp, 20)
+                bottom_count = min(num_shrimp, 20)
 
-            # Calculate the index range for the bottom 10 percent, excluding the two smallest
-            bottom_10_percent_index_start = 1  # Skip the two smallest
-            bottom_10_percent_index_end = bottom_10_percent_index_start + bottom_10_percent_count
+            elif 201 <= shrimp_per_lb <= 500:
+                top_count = min(num_shrimp, 25)
+                bottom_count = min(num_shrimp, 25)
 
-            # Calculate the sum of area ** 1.5 for the adjusted subset of shrimp_areas
-            sum_bottom_10_percent_areas = sum([area ** .636 for area in shrimp_areas[bottom_10_percent_index_start:bottom_10_percent_index_end]])
+            top_10_percent_index_start = num_shrimp - top_count
+            top_10_percent_index_end = num_shrimp  # Include all items in top count
 
-            # Calculate the overall ratio
+            bottom_10_percent_index_end = bottom_count  # Include all items in bottom count
+
+            sum_top_10_percent_areas = sum([area ** .796 for area in shrimp_areas[top_10_percent_index_start:top_10_percent_index_end]])
+            sum_bottom_10_percent_areas = sum([area ** .796 for area in shrimp_areas[:bottom_10_percent_index_end]])
+
             overall_ratio = sum_top_10_percent_areas / sum_bottom_10_percent_areas if sum_bottom_10_percent_areas != 0 else float('inf')
 
-            st.write("Sum of top 10% shrimp areas ^1.5:", sum_top_10_percent_areas)
-            st.write("Sum of bottom 10% shrimp areas^1.5:", sum_bottom_10_percent_areas)
+            st.write("Sum of top", top_count, "shrimp areas:", sum_top_10_percent_areas)
+            st.write("Sum of bottom", bottom_count, "shrimp areas:", sum_bottom_10_percent_areas)
             st.write("Overall Ratio:", overall_ratio)
 
-        # Cleanup: remove the temporary file
-        os.remove(tmp_file_path)
+            # Cleanup: remove the temporary file
+            os.remove(tmp_file_path)
     else:
         st.error("Failed to read the image. Please check the file format and try again.")
         # Cleanup even if the image fails to load
