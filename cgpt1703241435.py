@@ -16,7 +16,7 @@ rf = Roboflow(api_key="CFNTjMGFICYz3vLozs3A")
 project = rf.workspace().project("prawn-qoy6a")
 model = project.version(2).model
 
-st.write("some message")
+sv.write("some message")
 
 sv.title("Shrimp Detection and Analysis")
 
