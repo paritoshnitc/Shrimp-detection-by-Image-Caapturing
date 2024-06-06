@@ -18,7 +18,7 @@ model = project.version(2).model
 
 sv.title("Shrimp Detection and Analysis")
 
-uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg"])
+uploaded_file = sv.file_uploader("Choose an image...", type=["jpg", "jpeg"])
 if uploaded_file is not None:
     # Save uploaded file to a temporary file
     with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as tmp_file:
