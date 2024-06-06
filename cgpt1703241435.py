@@ -36,7 +36,7 @@ if uploaded_file is not None:
         resized_image = cv2.resize(image, None, fx=scale_factor, fy=scale_factor, interpolation=cv2.INTER_AREA)
 
         # Display the uploaded image
-        st.image(image, channels="BGR", caption="Uploaded Image")
+        sv.image(image, channels="BGR", caption="Uploaded Image")
 
         # Make prediction on the uploaded image using the path of the temporary file
         result = model.predict(tmp_file_path, confidence=50).json()
