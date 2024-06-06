@@ -1,6 +1,8 @@
-streamlit
-roboflow
 opencv-python-headless
-supervision
+roboflow
+streamlit
+requests
+Pillow
+requests-toolbelt
 numpy
 
