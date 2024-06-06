@@ -1,9 +1,2 @@
-opencv-python-headless
-roboflow
-streamlit
-requests
-Pillow
-requests-toolbelt
-numpy
-supervision
+
 
