@@ -1,8 +1,4 @@
-opencv-python-headless
-roboflow
 streamlit
-requests
-Pillow
-requests-toolbelt
+roboflow
+opencv-python-headless
 supervision
-
