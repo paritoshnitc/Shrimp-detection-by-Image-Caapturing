@@ -16,11 +16,9 @@ rf = Roboflow(api_key="CFNTjMGFICYz3vLozs3A")
 project = rf.workspace().project("prawn-qoy6a")
 model = project.version(2).model
 
-sv.write("some message")
+st.title("Shrimp Detection and Analysis")
 
-sv.title("Shrimp Detection and Analysis")
-
-uploaded_file = sv.file_uploader("Choose an image...", type=["jpg", "jpeg"])
+uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg"])
 if uploaded_file is not None:
     # Save uploaded file to a temporary file
     with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as tmp_file:
@@ -38,7 +36,7 @@ if uploaded_file is not None:
         resized_image = cv2.resize(image, None, fx=scale_factor, fy=scale_factor, interpolation=cv2.INTER_AREA)
 
         # Display the uploaded image
-        sv.image(image, channels="BGR", caption="Uploaded Image")
+        st.image(image, channels="BGR", caption="Uploaded Image")
 
         # Make prediction on the uploaded image using the path of the temporary file
         result = model.predict(tmp_file_path, confidence=50).json()
