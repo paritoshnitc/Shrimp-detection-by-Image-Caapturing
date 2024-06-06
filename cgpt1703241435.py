@@ -16,7 +16,7 @@ rf = Roboflow(api_key="CFNTjMGFICYz3vLozs3A")
 project = rf.workspace().project("prawn-qoy6a")
 model = project.version(2).model
 
-st.title("Shrimp Detection and Analysis")
+sv.title("Shrimp Detection and Analysis")
 
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg"])
 if uploaded_file is not None:
