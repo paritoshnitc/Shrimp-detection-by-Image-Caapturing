@@ -1,9 +1,9 @@
-opencv-python-headless
-roboflow 
 streamlit==1.33.0
+opencv-python-headless
+roboflow
 requests
 Pillow
 requests-toolbelt
 numpy
 supervision
-
+plotly
